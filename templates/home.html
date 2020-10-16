@@ -1,9 +1,41 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}
     Home
 {% endblock %}
 
 {% block content %}
-    <h1>Homepage</h1>
+    {% if user.is_authenticated %}
+        <h1>Hello</h1>
+    {% else %}
+        <h1>Find Your Jobs.</h1>
+
+        <div class="content_search_jobs">
+
+            <div class="search_jobs">
+
+                <form action="#" method="get">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Search Jobs</label>
+                        <input name="q" type="text" class="form-control" id="exampleInputSearchJobs" placeholder="Search Jobs">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Location</label>
+                        <input name="q" class="form-control" type="text" id="exampleInputLocation" placeholder="Location"
+                        aria-label="Search">
+                    </div>
+                    
+                </form>
+
+            </div>
+    
+            <div class="search_jobs_img">
+                <img src="{% static 'images/search_job_img.jpg' %}" style="border-radius: 50%; width: 450px; height: auto;" alt="">
+            </div>
+
+        </div>
+    {% endif %}
 {% endblock %}

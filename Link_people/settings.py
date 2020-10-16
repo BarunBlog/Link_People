@@ -125,3 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# defines the location of static files in local development
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),] 
+
+# location of static files for production 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# It is implicitly set for us and although this is an optional step, I prefer to make it explicit in all projects.
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]

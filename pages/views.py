@@ -7,3 +7,6 @@ that the only tweak needed is to specify our desired template, home.html
 '''
 class HomePageView(TemplateView):
     template_name = 'home.html'
+
+class AboutPageView(TemplateView):
+    template_name = 'about.html'
