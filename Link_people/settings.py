@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Local
     'pages.apps.PagesConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'Link_people.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_link_people',
+        'NAME': 'db_LinkPeople',
         'USER' : 'postgres',
         'PASSWORD': 'amijanina25',
         'HOST': 'localhost'
@@ -139,3 +140,6 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+# use CustomUser instead of the default User model.
+AUTH_USER_MODEL = 'users.CustomUser' 
