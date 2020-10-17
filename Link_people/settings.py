@@ -13,15 +13,35 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+
+env = environ.Env(
+    # set casting, defalut value
+    DEBUG=(bool, False)
+)
+
+env_file = os.path.join(BASE_DIR, ".env")
+
+# reading .env file
+environ.Env.read_env(env_file)
+
+# False if not in os.environ
+DEBUG = env('DEBUG', default=False)
+
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ, So provided default value
+SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ckf*fwk0ec^pcn3k1y=unh^6sn#+pkw)sw1qlx*ar@v+^1j&5t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,13 +109,10 @@ WSGI_APPLICATION = 'Link_people.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_LinkPeople',
-        'USER' : 'postgres',
-        'PASSWORD': 'amijanina25',
-        'HOST': 'localhost'
-    }
+
+     # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
+    'default': env.db(),
+
 }
 
 
