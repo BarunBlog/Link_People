@@ -38,11 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # Third-party
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
 
     # Local
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,4 +157,22 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'home' # for django auth
+ACCOUNT_LOGOUT_REDIRECT = 'home' # for allauth
+
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+
+
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomUserCreationForm'}
