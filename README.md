@@ -7,4 +7,6 @@ If you want to run this project then please install the required packages given 
 your virtual environment. 
 Command : pip install requirements.txt
 
-Also configure a PostgreSQL database locally.
+Configure a PostgreSQL database locally.
+
+And also don't forget to add .env file locally to configure environment variables
