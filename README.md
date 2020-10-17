@@ -1,4 +1,4 @@
-# Profiles REST API
+# Link People
 
 This website is based on job sites like Linked-in, Indeed, etc where users can log in, edit his/her profile, 
 search for jobs, access some premium content, and can also post jobs.
