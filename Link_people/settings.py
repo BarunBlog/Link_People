@@ -53,7 +53,6 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -158,7 +157,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home' # for django auth
-ACCOUNT_LOGOUT_REDIRECT = 'home' # for allauth
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home' # for allauth
+
+
+SITE_ID = 1
 
 
 
