@@ -10,6 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True, error_messages= {"invalid": "Please, enter correct E-mail"})
+    
 
 
     class Meta:

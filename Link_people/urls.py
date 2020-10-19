@@ -29,5 +29,6 @@ urlpatterns = [
     # Local app
     path('accounts/', include('users.urls')),
     path('', include('pages.urls')),
+    path('profile/', include('user_profile.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
