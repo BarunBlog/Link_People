@@ -1,26 +1,94 @@
 {% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-{% block title %} {{ UserProfile.headline }} {% endblock %}
+{% block title %} {{ custom_user.first_name }} {{ custom_user.last_name }} {% endblock %}
 
 {% block content %}
     <div class="profile-detail">
-        <!--{% if book.cover %}
-            
-            <img class="bookcover" src="{{ book.cover.url }}" alt="{{ book.title }}">
-            
-        {% endif %}
-        <br>
-        <h2><a href="">{{ book.title }}</a></h2>
-        <p>Author: {{ book.author }}</p>
-        <p>Price: {{ book.price }}</p>
-        <div>
-            <h3>Reviews</h3>
-            <ul>
-                {% for review in book.reviews.all %}
-                    <li>{{ review.review }} ({{ review.author }})</li>
-                {% endfor %}
-            </ul>
-        </div>-->
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+
+            <div class="profile-detail-image">
+                <img src="{% static 'images/cover_pic.jpg' %}" class="img-fluid" style="width: 100%; height: auto;" alt="">
+                {% if user_profile_info.User_Image %}
+                    <img src="{{ user_profile_info.User_image.url  }}" class="img-thumbnail" style="border-radius: 50%; margin-top: -90px; width: 20%; height: auto;" alt="">
+                {% endif %}
+            </div>
+
+            <div class="profile-main-detail">
+                
+                    <h4 style="margin-left: 20px;">{{ custom_user.first_name }} {{ custom_user.last_name }}</h4>
+                    <p style="margin-left: 20px; font-size: 20px;">{{ user_profile_info.Headline }}</p>
+                    <p style="margin-left: 20px; font-size: 18px;">Lives in {{ custom_user.city_or_district }}, {{ custom_user.country }}</p>
+                
+                    <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Edit Profile <i class="fa fa-edit"></i></button>
+                
+            </div>
+            <p style="font-size: 16px;">{{ user_profile_info.Summary }}</p>
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-education">
+                <h3>Education</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ user_profile_info.School_or_College_or_University }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">{{ user_profile_info.Degree }} - {{ user_profile_info.Field_of_study }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">{{ user_profile_info.Education_Start_year }} - {{ user_profile_info.Education_End_year }}</p>
+            </div>
+
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-experience">
+                <h3>Experience</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ user_profile_info.Experience_Title }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">Works at - {{ user_profile_info.Company }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">Employee type - {{ user_profile_info.Employee_type }}</p>
+                {% if user_profile_info.End_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ user_profile_info.Start_year }} - {{ user_profile_info.End_year }}</p>
+                {% elif not user_profile_info.Start_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ user_profile_info.Start_year }} - {{ user_profile_info.End_year }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-skills">
+                <h3>Skills & Endorsements</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ user_profile_info.Skill }}</p>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="post-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>-->
+            </div>
+        </div>
     </div>
 
 {% endblock %}

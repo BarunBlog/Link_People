@@ -2,7 +2,10 @@ import uuid
 from django.db import models
 
 from django.contrib.auth import get_user_model
+from users.models import CustomUser
 from django.urls import reverse
+
+import PIL.Image
 
 
 
@@ -23,12 +26,12 @@ class UserProfileInfo(models.Model):
         editable=False
     
     )
-    id = models.ForeignKey(
-        get_user_model(),
+    id = models.OneToOneField(
+        CustomUser(),
         on_delete=models.CASCADE
     )
     # Main Info
-    User_image = models.ImageField(upload_to='profile_pic/')
+    User_image = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
     Headline = models.CharField(max_length=50, blank=False)
     Current_position = models.CharField(max_length=100, blank=True)
     Summary = models.TextField(blank=True)
@@ -54,9 +57,41 @@ class UserProfileInfo(models.Model):
     Skill = models.TextField(blank=True)
 
 
+    def save(self, *args, **kwargs):
+        super().save()
+        img = Image.open(self.User_image.url)
+        width, height = img.size  # Get dimensions
+
+        if width > 300 and height > 300:
+            # keep ratio but shrink down
+            img.thumbnail((width, height))
+
+        # check which one is smaller
+        if height < width:
+            # make square by cutting off equal amounts left and right
+            left = (width - height) / 2
+            right = (width + height) / 2
+            top = 0
+            bottom = height
+            img = img.crop((left, top, right, bottom))
+
+        elif width < height:
+            # make square by cutting off bottom
+            left = 0
+            right = width
+            top = 0
+            bottom = width
+            img = img.crop((left, top, right, bottom))
+
+        if width > 300 and height > 300:
+            img.thumbnail((300, 300))
+
+        img.save(self.User_image.path)
+
+
 
     def __str__(self):
-        return self.headline
+        return self.Headline
 
     def get_absolute_url(self):
         return reverse('user_profile_info', kwargs={'pk':str(self.pk)})

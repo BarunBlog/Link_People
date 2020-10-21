@@ -62,3 +62,47 @@ h1 {
         width: 100%;
     }
 }
+
+.profile-detail {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 1200px;
+    margin-top: 20px;
+    border: 0px solid red;
+}
+
+.profile-detail-image {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border: 0px solid blue
+}
+
+
+.profile-main-detail {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    border: 0px solid blue
+}
+
+.profile-education {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 180px;
+    border: 0px solid blue
+}
+
+.profile-experience {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+    border: 0px solid blue
+}
