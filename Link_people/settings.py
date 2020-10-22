@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
+    'jobs.apps.JobsConfig',
 ]
 
 
