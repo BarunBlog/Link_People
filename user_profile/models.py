@@ -5,8 +5,7 @@ from django.contrib.auth import get_user_model
 from users.models import CustomUser
 from django.urls import reverse
 
-import PIL.Image
-
+from PIL import Image
 
 
 EmpType_choises = (
@@ -57,9 +56,10 @@ class UserProfileInfo(models.Model):
     Skill = models.TextField(blank=True)
 
 
+
     def save(self, *args, **kwargs):
         super().save()
-        img = Image.open(self.User_image.url)
+        img = Image.open(self.User_image.path)
         width, height = img.size  # Get dimensions
 
         if width > 300 and height > 300:

@@ -3,43 +3,37 @@ from django.views.generic import DetailView
 from .models import UserProfileInfo
 from users.models import CustomUser
 
-from django.shortcuts import redirect, render
+from django.shortcuts import (
+    redirect,
+    render,
+    get_object_or_404,
+    HttpResponseRedirect,
+    reverse
+)
 
 from .forms import SaveProfileForm
 
-#class DetailUserProfileInfo(DetailView):
-def DetailUserProfileInfo(request, pk):
-    """model = UserProfileInfo
-    #context_object_name = 'UserProfile'
-    template_name = 'user_profile/user_profile.html'''
 
-    '''def get_queryset(self):
-        return UserProfileInfo.objects.select_related('id')'''
 
-    def get_context_data(self, **kwargs):
-        context = super(DetailUserProfileInfo, self).get_context_data(**kwargs)
-        context['custom_user'] = CustomUser.objects.filter(id=self.request.user.id)[0]
-        '''a = UserProfileInfo.objects.filter(id_id=self.request.user.id)[0]
-        if not a:
-            context['message'] = 'Profile not updated'
-        else:
-            context['user_profile_info'] = a
-            context['message'] = 'Profile updated'''
-        
-        return context"""
+def detailUserProfileInfo(request, pk):
 
-    custom_user = CustomUser.objects.filter(id=request.user.id)[0]
+    """ Shows detailView of User"""
+
+
     a = UserProfileInfo.objects.filter(id_id=request.user.id)
     user_profile_info = None
     if not a:
-        message = 'Profile not updated'
+        message = 'Profile not edited'
     else:
         user_profile_info = a[0]
-        message = 'Profile updated'
-    
+        message = 'Profile edited'
 
-    if request.method == "POST":
-        form = SaveProfileForm(request.POST)
+
+    
+    custom_user = CustomUser.objects.filter(id=request.user.id)[0]
+
+    if request.method == "POST" and not a:
+        form = SaveProfileForm(request.POST, request.FILES)
         if form.is_valid():
             
             User_image = form.cleaned_data['User_image']
@@ -75,15 +69,82 @@ def DetailUserProfileInfo(request, pk):
             print(form.errors)
             message = form.errors
             return render(request, "message/error.html", {'message': message})
+
+    elif a:
+        """ As Profile edited for the first time now when user click edit profile this 
+        section of code will run and will update the data."""
+
+
+        # fetch the object related to passed pk
+        obj = get_object_or_404(UserProfileInfo, pk = pk)
+        
+        if request.method == "POST":
+        
+            # pass the object as instance in form 
+            form = SaveProfileForm(request.POST, request.FILES) 
+        
+            # save the data from the form and 
+            # redirect to detail_view 
+            if form.is_valid(): 
+                User_image = form.cleaned_data['User_image']
+                Headline = form.cleaned_data['Headline']
+                Current_position = form.cleaned_data['Current_position']
+                Summary = form.cleaned_data['Summary']
+                School_or_College_or_University = form.cleaned_data['School_or_College_or_University']
+                Degree = form.cleaned_data['Degree']
+                Field_of_study = form.cleaned_data['Field_of_study']
+                Education_Start_year = form.cleaned_data['Education_Start_year']
+                Education_End_year = form.cleaned_data['Education_End_year']
+                Experience_Title = form.cleaned_data['Experience_Title']
+                Employee_type = form.cleaned_data['Employee_type']
+                Company = form.cleaned_data['Company']
+                Start_year = form.cleaned_data['Start_year']
+                End_year = form.cleaned_data['End_year']
+                Skill = form.cleaned_data['Skill']
+
+                user_profile = UserProfileInfo.objects.get(id_id=request.user.id)
+
+                user_profile.User_image = User_image
+                user_profile.Headline = Headline
+                user_profile.Current_position = Current_position
+                user_profile.Summary = Summary
+                user_profile.School_or_College_or_University = School_or_College_or_University
+                user_profile.Degree = Degree
+                user_profile.Field_of_study = Field_of_study
+                user_profile.Education_Start_year = Education_Start_year
+                user_profile.Education_End_year = Education_End_year
+                user_profile.Experience_Title = Experience_Title
+                user_profile.Employee_type = Employee_type
+                user_profile.Company = Company
+                user_profile.Start_year = Start_year
+                user_profile.End_year = End_year
+                user_profile.User_image = User_image
+                user_profile.Skill = Skill
+
+                user_profile.save()
+
+
+                
+                return redirect('user_profile_info', pk=pk) # Calling via url name
+            else:
+                print(form.errors)
+                message = "Something Went Wrong."
+                return render(request, "message/error.html", {'message': message})
+        else:
+            form = SaveProfileForm(instance=obj)
+            #return render(request, "user_profile/user_profile.html", {'form':form})
+
+    
     else:
+        """As profile not edited yet for the first time so only going to render the form"""
         form = SaveProfileForm()
 
     
     
     return render(request, 'user_profile/user_profile.html', {'custom_user': custom_user, 'message': message,
             'user_profile_info':user_profile_info, 'form':form})
-    
-    
+
+
 
 
 
@@ -97,10 +158,3 @@ def GetUserProfileUuId(request):
         return redirect('user_profile_info', profile_uuid[0]["u_id"])
 
 
-
-
-
-'''def DetailUserProfileInfo(request, id):
-
-    data = UserProfileInfo.objects.get(u_id=id)
-    return render(request, 'user_profile/user_profile.html', {'UserProfile': data})'''
