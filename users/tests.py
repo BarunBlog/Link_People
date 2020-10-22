@@ -18,14 +18,12 @@ class CustomUserTests(TestCase):
             first_name='Partho',
             last_name='Bhattacharjee',
             country='Bangladesh',
-            city_or_district='Sylhet',
-            account_role='Student',
+            city_or_district='Sylhet'
         )
 
-        self.assertEqual(user.username, 'partho')
         self.assertEqual(user.email, 'partho007@gmail.com')
         self.assertEqual(user.country, 'Bangladesh')
-        self.assertEqual(user.account_role, 'Student')
+        self.assertEqual(user.city_or_district, 'Sylhet')
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
@@ -39,7 +37,7 @@ class CustomUserTests(TestCase):
             password='testpass123'
         )
 
-        self.assertEqual(admin_user.username, 'superadmin')
+
         self.assertEqual(admin_user.email, 'superadmin@email.com')
         self.assertTrue(admin_user.is_active)
         self.assertTrue(admin_user.is_staff)

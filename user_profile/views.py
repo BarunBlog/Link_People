@@ -128,7 +128,7 @@ def detailUserProfileInfo(request, pk):
                 return redirect('user_profile_info', pk=pk) # Calling via url name
             else:
                 print(form.errors)
-                message = "Something Went Wrong."
+                message = form.errors
                 return render(request, "message/error.html", {'message': message})
         else:
             form = SaveProfileForm(instance=obj)
