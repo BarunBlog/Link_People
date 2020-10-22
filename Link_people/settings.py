@@ -189,7 +189,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 ACCOUNT_EMAIL_REQUIRED = True

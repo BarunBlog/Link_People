@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from allauth.account.views import PasswordChangeView
 
 '''
 We can leverage Django’s built-in TemplateView so
@@ -10,3 +11,6 @@ class HomePageView(TemplateView):
 
 class AboutPageView(TemplateView):
     template_name = 'about.html'
+
+class CustomPasswordChangeView(PasswordChangeView):
+    success_url = 'home'
