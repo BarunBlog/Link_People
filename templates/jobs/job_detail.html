@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+
+{% block title %} {{ job_detail.Job_title }} {% endblock %}
+
+{% block content %}
+    <div class="job-detail">
+
+        <div class="job-detail-left">
+
+            <h3>{{ job_detail.Job_title }}</h3>
+            <b style="font-size: 18px;">{{ job_detail.Company }}, </b>
+            <p style="display: inline;">{{ job_detail.Job_location }}</p>
+            <p style="color: rgb(92, 92, 92);">Date posted- {{ job_detail.Date_posted }}</p>
+            <br>
+            <h6>Description:</h6>
+            <p style="font-size: 18px;">{{ job_detail.Description|linebreaks }}</p>
+            <h6>Skills</h6>
+            <p style="font-size: 18px;">{{ job_detail.Add_skills|linebreaks }}</p>
+
+        </div>
+
+        <div class="job-detail-right">
+            <br><br>
+            <a href=# style="margin-left: 5px;" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Apply</a>
+            <br><br><br>
+            <p style="color: rgb(92, 92, 92); font-size: 18px;">Job Details</p>
+            <b>Employment Type</b>
+            <p>{{ job_detail.Employee_type }}</p>
+            <br>
+            {% if job_detail.is_approved %}
+                <p>This Job post is verified</p>
+            {% else %}
+                <p>This Job post is not verified</p>
+            {% endif %}
+
+        </div>
+        
+        
+    </div>
+
+{% endblock %}

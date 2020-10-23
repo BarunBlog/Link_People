@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(247, 247, 247);
+}
+
 .container{
     position: relative;
     margin: 0 auto;
@@ -15,7 +19,7 @@ h1 {
     height: auto;
 }
 
-.content_search_jobs {
+.content_search_jobs_home {
     position: relative;
     margin: 0 auto;
     width: 100%;
@@ -24,7 +28,7 @@ h1 {
     border: 0px solid red;
 }
 
-.search_jobs {
+.search_jobs_home {
     position: relative;
     margin: 0 auto;
     height: 400px;
@@ -52,10 +56,10 @@ h1 {
 }
 
 @media (max-width:700px) {
-    .content_search_jobs{
+    .content_search_jobs_home{
         height: 820px;
     }
-    .search_jobs{
+    .search_jobs_home{
         width: 80%;
     }
     .search_jobs_img{
@@ -105,4 +109,77 @@ h1 {
     width: 100%;
     height: 200px;
     border: 0px solid blue
+}
+
+.post_search_job {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border: 0px solid blue;
+}
+
+
+.search_job_job_list {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 32px;
+    height: auto;
+    background-image: url('../images/div_back.jpg');
+    text-align: left;
+    
+}
+
+.post-job {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    
+    text-align: center;
+}
+
+.post-job-form{
+    position: relative;
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+
+.job-detail-left {
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+    margin-bottom: 30px;
+    float: left;
+    border: 0px solid black;
+}
+
+.job-detail-right {
+    position: relative;
+    margin: 0 auto;
+    width: 20%;
+    height: auto;
+    margin-bottom: 30px;
+    float: left;
+    border: 0px solid black;
+}
+
+.job-list {
+    position: relative;
+    margin: 0 auto;
+    width: 32%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    float: left;
+    border: 0px solid black;
 }

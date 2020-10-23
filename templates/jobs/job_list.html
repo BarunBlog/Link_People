@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+
+{% block title %} Jobs {% endblock %}
+
+{% block content %}
+    <div class="post_search_job">
+        <a href="{% url 'post_job' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Post a Job</a>
+    
+        <div class="shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="search_job_job_list">
+                <h3 style="text-align: center;">Search for your next job</h3>
+                <form>
+                    <div class="form-row" style="margin-left: 10px; margin-right: 10px;">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Search by title or skill">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Search by location">
+                        </div>
+                   
+                    </div>
+                    <button style="margin-left: 15px; margin-bottom: 15px;" type="submit" class="btn btn-outline-primary">Search</button>
+                </form>
+            </div>
+        </div>
+        
+    
+    </div>
+    
+    
+    {% for job in job_list %}
+        <div class="job-list">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h2><a href="{{ job.get_absolute_url }}">{{ job.Job_title }}</a></h2>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Company }}</p>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Job_location }}</p>
+                <br><br>
+                <p style="color: rgb(92, 92, 92);font-size: 15px;">Date posted- {{ job.Date_posted }}</p>             
+
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
