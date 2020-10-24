@@ -7,7 +7,6 @@ from django.utils import timezone
 
 EmpType_choises = (
         ('full-time', 'Full-time'),
-        ('entry-level', 'Entry-level'),
         ('part-time', 'Part-time'),
         ('self-employed', 'Self-employed'),
         ('internship', 'Internship'),
