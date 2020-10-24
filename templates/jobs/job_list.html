@@ -12,7 +12,7 @@
                 <form>
                     <div class="form-row" style="margin-left: 10px; margin-right: 10px;">
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" placeholder="Search by title or skill">
+                            <input type="text" class="form-control" placeholder="Search by title, skill or company">
                         </div>
                         <div class="form-group col-md-6">
                             <input type="text" class="form-control" placeholder="Search by location">
@@ -31,7 +31,7 @@
     {% for job in job_list %}
         <div class="job-list">
             <div class="shadow p-3 mb-5 bg-white rounded">
-                <h2><a href="{{ job.get_absolute_url }}">{{ job.Job_title }}</a></h2>
+                <h4><a href="{{ job.get_absolute_url }}">{{ job.Job_title }}</a></h4>
                 <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Company }}</p>
                 <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Job_location }}</p>
                 <br><br>
@@ -39,5 +39,7 @@
 
             </div>
         </div>
+        {% empty %}
+            <li>No objects yet.</li>
     {% endfor %}
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+
+{% block title %} Search {% endblock %}
+
+
+{% block content %}
+
+    <h1>Search Results</h1>
+    
+    
+    {% for job in search_job_list %}
+        <div class="job-list">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h4><a href="{{ job.get_absolute_url }}">{{ job.Job_title }}</a></h4>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Company }}</p>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Job_location }}</p>
+                <br><br>
+                <p style="color: rgb(92, 92, 92);font-size: 15px;">Date posted- {{ job.Date_posted }}</p>             
+
+            </div>
+        </div>
+        {% empty %}
+            <li>No matching jobs found</li>
+    {% endfor %}
+
+{% endblock %}
