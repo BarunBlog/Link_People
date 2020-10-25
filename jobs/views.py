@@ -17,13 +17,6 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 
 
-'''class CreateJobView(LoginRequiredMixin, CreateView):
-    form_class = PostJobForm
-    template_name = 'jobs/post_job.html'
-    success_message = 'Your job post is waiting for approval'
-    success_url = reverse_lazy('job_list')
-    login_url = 'account_login'
-    messages.add_message(request, messages.INFO, 'All items on this page have free shipping.')'''
 
 @login_required
 def createJobView(request):
@@ -76,9 +69,12 @@ class JobListView(ListView):
         context = super().get_context_data(**kwargs)
 
         a = PostJobModel.objects.filter(Is_approved=True)
-        context['is_posted_job'] = CustomUser.objects.filter(id=self.request.user.id).values('is_posted_job')[0]["is_posted_job"]
-        
-        context['job_list'] = a
+
+        if a:
+            if self.request.user.id:
+                context['is_posted_job'] = CustomUser.objects.filter(id=self.request.user.id).values('is_posted_job')[0]["is_posted_job"]
+            
+            context['job_list'] = a
 
         
         return context
