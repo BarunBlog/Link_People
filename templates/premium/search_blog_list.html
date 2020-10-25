@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block title %} Search Result {% endblock %}
+
+
+{% block content %}
+
+    <h1>Search Results</h1>
+    
+    
+    {% for blog in search_blog_list %}
+        <div class="job-list">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h4 > <a href="{{ blog.get_absolute_url }}">{{ blog.Title }}</a></h4>
+                <b style="color: rgb(92, 92, 92);font-size: 18px;">Posted By {{ blog.Author }}</b>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">Date posted- {{ blog.Date_Posted }}</p>
+                <br><br>
+            </div>
+        </div>
+        {% empty %}
+            <li>No objects yet.</li>
+    {% endfor %}
+
+{% endblock %}

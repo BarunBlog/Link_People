@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block title %} {{ blog_detail.Title }} {% endblock %}
+
+{% block content %}
+    <div class="job-detail">
+
+
+        <h4 style="text-align: center;">{{ blog_detail.Title }}, </h4>
+        <p style="text-align: center;"><b style="font-size: 18px;">Posted By - {{ blog_detail.Author }}</b></p>
+        <p style="color: rgb(92, 92, 92); text-align: center;">Date posted- {{ blog_detail.Date_Posted }}</p>
+
+        {% if blog_detail.Blog_Cover %}
+            <img src="{{ blog_detail.Blog_Cover.url }}" class="img-thumbnail" style="display: block;margin-left: auto;margin-right: auto;width: 70%; height: auto;" alt="">
+        {% endif %}
+        
+        <p style="font-size: 18px;">{{ blog_detail.Description|linebreaks }}</p>
+        
+    </div>
+
+
+{% endblock %}

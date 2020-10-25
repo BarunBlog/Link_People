@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %} Blog List {% endblock %}
+
+{% block content %}
+    
+    <div class="post_search_job">
+    
+        <div class="shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="search_job_job_list">
+                <h3 style="text-align: center;">Search your blog here</h3>
+
+                <form action="{% url 'blog_search_results' %}" method="get">
+                    <div class="form-row" style="margin-left: 10px; margin-right: 10px;">
+                        <div class="form-group col-md-6">
+                            <input name="q1" type="text" class="form-control" placeholder="Search by blog title here">
+                        </div>
+                   
+                    </div>
+                    <button style="margin-left: 15px; margin-bottom: 15px;" type="submit" class="btn btn-outline-primary">Search</button>
+                </form>
+
+            </div>
+        </div>
+        
+    
+    </div>
+    
+    
+    {% for blog in blog_list %}
+        <div class="job-list">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h4 > <a href="{{ blog.get_absolute_url }}">{{ blog.Title }}</a></h4>
+                <b style="color: rgb(92, 92, 92);font-size: 18px;">Posted By {{ blog.Author }}</b>
+                <p style="color: rgb(92, 92, 92);font-size: 16px;">Date posted- {{ blog.Date_Posted }}</p>
+                <br><br>
+            </div>
+        </div>
+        {% empty %}
+            <li>No objects yet.</li>
+    {% endfor %}
+{% endblock %}

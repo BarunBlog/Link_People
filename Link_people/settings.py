@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'user_profile.apps.UserProfileConfig',
     'jobs.apps.JobsConfig',
+    'get_premium.apps.GetPremiumConfig',
 ]
 
 
