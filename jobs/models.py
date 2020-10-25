@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from django.contrib.auth import get_user_model
+
 
 EmpType_choises = (
         ('full-time', 'Full-time'),
@@ -20,6 +22,11 @@ class PostJobModel(models.Model):
         default=uuid.uuid4,
         editable=False
     )
+    Job_author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=True
+    )
     Job_title = models.CharField(max_length=150, blank=False)
     Company = models.CharField(max_length=150, blank=False)
     Job_location = models.CharField(max_length=250, blank=False)
@@ -30,12 +37,25 @@ class PostJobModel(models.Model):
 
     Description = models.TextField(blank=False)
     Add_skills = models.TextField(blank=False)
-    Email_address = models.EmailField(blank=False)
     
     def __str__(self):
         return self.Job_title
 
     def get_absolute_url(self):
         return reverse('jobs_details', kwargs={'pk':str(self.pk)})
+
+
+
+class ApplicationModel(models.Model):
+    Job = models.ForeignKey(
+        PostJobModel,
+        on_delete=models.CASCADE,
+    )
+    Job_title = models.CharField(max_length=150, blank=False)
+    Applicant = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE
+    )
     
-    
+    def __str__(self):
+        return self.Job_title

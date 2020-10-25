@@ -14,6 +14,9 @@
     {% endif %}
     
     <div class="post_search_job">
+        {% if is_posted_job %}
+        <a href="{% url 'applicant_list' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">See applicants</a>
+        {% endif %}
         <a href="{% url 'post_job' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Post a Job</a>
     
         <div class="shadow-sm p-3 mb-5 bg-white rounded">

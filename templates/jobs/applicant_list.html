@@ -1,0 +1,39 @@
+{% extends '_base.html' %}
+
+{% block title %} Applicant List {% endblock %}
+
+{% block content %}
+    <div class="applicant-list">
+        <table class="table">
+
+            <thead class="thead-dark">
+                <tr>
+                <!--<th scope="col">#</th>-->
+                <th scope="col">Job Title</th>
+                <th scope="col">Applicant Name</th>
+                </tr>
+            </thead>
+    
+    
+            {% for applicant in applicant_list %}
+                
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <!--<th scope="row">{{i}}</th>-->
+                                <td>{{ applicant.Job_title }}</td>
+                                <td>{{ first_name }} {{ last_name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            
+                {% empty %}
+                    <li>No objects yet.</li>
+                
+            {% endfor %}    
+
+        </table>
+        
+        
+    </div>
+{% endblock %}

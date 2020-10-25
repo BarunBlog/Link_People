@@ -1,9 +1,11 @@
+import uuid
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 from django.views.generic import ListView, DetailView, CreateView
 
-from .models import PostJobModel
+from .models import PostJobModel, ApplicationModel
+from users.models import CustomUser
 from .forms import PostJobForm
 
 from django.contrib.messages.views import SuccessMessageMixin
@@ -12,7 +14,7 @@ from django.urls import reverse_lazy
 
 from django.db.models import Q
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 
 
 '''class CreateJobView(LoginRequiredMixin, CreateView):
@@ -37,14 +39,15 @@ def createJobView(request):
             Employee_type = form.cleaned_data['Employee_type']
             Description = form.cleaned_data['Description']
             Add_skills = form.cleaned_data['Add_skills']
-            Email_address = form.cleaned_data['Email_address']
             
 
             p = PostJobModel.objects.create(Job_title=Job_title, Company=Company, 
             Job_location=Job_location, Employee_type=Employee_type, Description=Description,
-            Add_skills=Add_skills, Email_address=Email_address)
+            Add_skills=Add_skills)
             
             p.save()
+
+            CustomUser.objects.filter(id=request.user.id).update(is_posted_job=True)
             
             message = 'Your job post is waiting for approval'
             
@@ -73,6 +76,7 @@ class JobListView(ListView):
         context = super().get_context_data(**kwargs)
 
         a = PostJobModel.objects.filter(Is_approved=True)
+        context['is_posted_job'] = CustomUser.objects.filter(id=self.request.user.id).values('is_posted_job')[0]["is_posted_job"]
         
         context['job_list'] = a
 
@@ -106,3 +110,36 @@ class SearchResultsListView(ListView):
             Q(Is_approved__icontains=True)
         )
 
+@login_required
+def applicantCreateView(request):
+    Job_id = uuid.UUID(request.POST.get('id'))
+    Job_title = PostJobModel.objects.filter(Job_id=Job_id)[0].Job_title
+    Applicant_id = request.user.id
+
+    p = ApplicationModel.objects.create(Job_id=Job_id, Job_title=Job_title, 
+            Applicant_id=Applicant_id)
+            
+    p.save()
+
+    message = 'You have successfully applied'
+      
+           
+    #return HttpResponseRedirect(reverse('jobs_details', args={Job_id}), {'message':message})
+
+    return render(request, 'jobs/application_done.html', {'message':message})
+
+
+
+class ApplicantList(LoginRequiredMixin, ListView):
+    model = ApplicationModel
+    context_object_name = 'applicant_list'
+    template_name = 'jobs/applicant_list.html'
+
+    def get_context_data(self, **kwargs):
+    
+        context = super().get_context_data(**kwargs)
+
+        context['first_name'] = CustomUser.objects.filter(id=self.request.user.id).values('first_name')[0]["first_name"]
+        context['last_name'] = CustomUser.objects.filter(id=self.request.user.id).values('last_name')[0]["last_name"]
+        
+        return context
