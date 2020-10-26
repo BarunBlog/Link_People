@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'user_profile.apps.UserProfileConfig',
     'jobs.apps.JobsConfig',
     'get_premium.apps.GetPremiumConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 
@@ -227,3 +228,9 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 # Settings for Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# Stripe
+STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')

@@ -34,5 +34,6 @@ urlpatterns = [
     path('profile/', include('user_profile.urls')),
     path('jobs/', include('jobs.urls')),
     path('premium/', include('get_premium.urls')),
+    path('purchase/', include('orders.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
