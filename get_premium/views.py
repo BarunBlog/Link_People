@@ -3,7 +3,11 @@ from django.shortcuts import render
 from .models import PremiumBlog
 
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+)
 
 from django.db.models import Q
 
@@ -15,14 +19,16 @@ class BlogListView(LoginRequiredMixin, ListView):
 
 
 
-class BlogDetailView(LoginRequiredMixin, DetailView):
+class BlogDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = PremiumBlog
     context_object_name = 'blog_detail'
     template_name = 'premium/blog_detail.html'
+    login_url = 'account_login'
+    permission_required = 'get_premium.special_status' 
 
 
 
-class SearchResultsListView(ListView):
+class SearchResultsListView(LoginRequiredMixin, ListView):
     model = PremiumBlog
     context_object_name = 'search_blog_list'
     template_name = 'premium/search_blog_list.html'

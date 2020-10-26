@@ -18,6 +18,12 @@ class PremiumBlog(models.Model):
     Description = models.TextField(blank=False)
 
 
+    class Meta:
+        permissions = [
+            ('special_status', 'Can read all blogs')
+        ]
+
+
     def __str__(self):
         return self.Title
 
