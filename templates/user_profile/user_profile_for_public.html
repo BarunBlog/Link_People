@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ join_result.id.first_name }} {{ join_result.id.last_name }} {% endblock %}
+
+{% block content %}
+    <div class="profile-detail">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+
+            <div class="profile-detail-image">
+                <img src="{% static 'images/cover_pic.jpg' %}" class="img-fluid" style="width: 100%; height: auto;" alt="">
+                {% if join_result.User_image %}
+                    <img src="{{ join_result.User_image.url  }}" class="img-thumbnail" style="border-radius: 50%; margin-top: -90px; width: 20%; height: auto;" alt="">
+                {% endif %}
+            </div>
+
+            <div class="profile-main-detail">
+                
+                    <h4 style="margin-left: 20px;">{{ join_result.id.first_name }} {{ join_result.id.last_name }}</h4>
+                    <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Headline }}</p>
+                    <p style="margin-left: 20px; font-size: 18px;">Lives in {{ join_result.id.city_or_district }}, {{ join_result.id.country }}</p>
+                    <p style="margin-left: 20px; font-size: 18px;">Email address- {{ join_result.id.email }}</p>
+                    
+                
+            </div>
+            <p style="font-size: 16px;">{{ join_result.Summary }}</p>
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-education">
+                <h3>Education</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ join_result.School_or_College_or_University }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">{{ join_result.Degree }} - {{ join_result.Field_of_study }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">{{ join_result.Education_Start_year }} - {{ join_result.Education_End_year }}</p>
+            </div>
+
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-experience">
+                <h3>Experience</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Experience_Title }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">Works at - {{ join_result.Company }}</p>
+                <p style="margin-left: 20px; font-size: 18px;">Employee type - {{ join_result.Employee_type }}</p>
+                {% if user_profile_info.End_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ join_result.Start_year }} - {{ join_result.End_year }}</p>
+                {% elif not user_profile_info.Start_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ join_result.Start_year }} - {{ join_result.End_year }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="profile-skills">
+                <h3>Skills & Endorsements</h3>
+                <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Skill }}</p>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

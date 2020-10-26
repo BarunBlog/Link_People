@@ -22,7 +22,16 @@
                             <tr>
                                 <!--<th scope="row">{{i}}</th>-->
                                 <td>{{ applicant.Job_title }}</td>
-                                <td>{{ first_name }} {{ last_name }}</td>
+
+                                <form id="myForm" action="{% url 'useridFromApplicantList' %}" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <td>
+                                        <button class="btn btn-light" name="id" value="{{ applicant.Applicant_id }}">
+                                        {{ applicant.Applicant.first_name }} {{ applicant.Applicant.last_name }}</button>
+                                    </td>
+                                </form>
+
                             </tr>
                         </tbody>
                     </table>

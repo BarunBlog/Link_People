@@ -23,8 +23,6 @@ def createJobView(request):
     if request.method == "POST":
         form = PostJobForm(request.POST)
         if form.is_valid():
-        
-            job_list = PostJobModel.objects.filter(Is_approved=True)
 
             Job_title = form.cleaned_data['Job_title']
             Company = form.cleaned_data['Company']
@@ -36,27 +34,31 @@ def createJobView(request):
 
             p = PostJobModel.objects.create(Job_title=Job_title, Company=Company, 
             Job_location=Job_location, Employee_type=Employee_type, Description=Description,
-            Add_skills=Add_skills)
+            Add_skills=Add_skills, Job_author_id=request.user.id)
             
             p.save()
 
             CustomUser.objects.filter(id=request.user.id).update(is_posted_job=True)
             
-            message = 'Your job post is waiting for approval'
-            
            
-            return render(request, 'jobs/job_list.html', {'message': message, 'job_list':job_list})
+            return redirect('onlyRedirect')
 
         else:
             print(form.errors)
             message = form.errors
-            return render(request, "message/error.html", {'message': message, 'job_list':job_list})
+            return render(request, "message/error.html", {'message': message})
     
     else:
         form = PostJobForm()
     
     return render(request, 'jobs/post_job.html', {'form':form})
 
+
+def onlyRedirect(request):
+    message = 'Your job post is waiting for approval'
+    job_list = PostJobModel.objects.filter(Is_approved=True)
+
+    return render(request, 'jobs/job_list.html', {'message': message, 'job_list': job_list})
 
 
 class JobListView(ListView):
@@ -68,13 +70,11 @@ class JobListView(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
 
-        a = PostJobModel.objects.filter(Is_approved=True)
+        context['job_list'] = PostJobModel.objects.filter(Is_approved=True)
 
-        if a:
-            if self.request.user.id:
-                context['is_posted_job'] = CustomUser.objects.filter(id=self.request.user.id).values('is_posted_job')[0]["is_posted_job"]
+        if self.request.user.id:
+            context['is_posted_job'] = CustomUser.objects.filter(id=self.request.user.id).values('is_posted_job')[0]["is_posted_job"]
             
-            context['job_list'] = a
 
         
         return context
@@ -135,7 +135,7 @@ class ApplicantList(LoginRequiredMixin, ListView):
     
         context = super().get_context_data(**kwargs)
 
-        context['first_name'] = CustomUser.objects.filter(id=self.request.user.id).values('first_name')[0]["first_name"]
-        context['last_name'] = CustomUser.objects.filter(id=self.request.user.id).values('last_name')[0]["last_name"]
-        
+        context['applicant_list'] = ApplicationModel.objects.select_related('Applicant')
+
+                
         return context

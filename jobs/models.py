@@ -25,7 +25,6 @@ class PostJobModel(models.Model):
     Job_author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        null=True
     )
     Job_title = models.CharField(max_length=150, blank=False)
     Company = models.CharField(max_length=150, blank=False)

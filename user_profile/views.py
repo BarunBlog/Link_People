@@ -1,3 +1,4 @@
+import uuid
 from django.views.generic import DetailView
 
 from .models import UserProfileInfo
@@ -143,6 +144,26 @@ def detailUserProfileInfo(request, pk):
     
     return render(request, 'user_profile/user_profile.html', {'custom_user': custom_user, 'message': message,
             'user_profile_info':user_profile_info, 'form':form})
+
+
+
+def getUseridFromApplicantList(request):
+    Applicant_id = request.POST.get('id')
+    #join_result = UserProfileInfo.objects.select_related('id')
+    User_uuid = UserProfileInfo.objects.filter(id_id=Applicant_id).values('u_id')
+
+    return redirect('detailProfileViewForPublic', User_uuid[0]["u_id"])
+
+
+def detailProfileViewForPublic(request, pk):
+    User_id = UserProfileInfo.objects.filter(u_id=pk).values('id_id')[0]["id_id"]
+    join_result = UserProfileInfo.objects.filter(id_id=User_id).select_related()[0]
+
+    return render(request, 'user_profile/user_profile_for_public.html', {'join_result': join_result})
+
+
+
+
 
 
 
