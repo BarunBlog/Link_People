@@ -28,7 +28,7 @@
                                     
                                     <td>
                                         <button class="btn btn-light" name="id" value="{{ applicant.Applicant_id }}">
-                                        {{ applicant.Applicant.first_name }} {{ applicant.Applicant.last_name }}</button>
+                                        {{ applicant.first_name }} {{ applicant.last_name }}</button>
                                     </td>
                                 </form>
 
@@ -37,7 +37,7 @@
                     </table>
             
                 {% empty %}
-                    <li>No objects yet.</li>
+                    <li>No one applied yet.</li>
                 
             {% endfor %}    
 

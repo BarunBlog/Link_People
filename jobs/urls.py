@@ -8,6 +8,7 @@ from .views import (
     applicantCreateView,
     ApplicantList,
     onlyRedirect,
+    ApplicationDone,
 )
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     path('post-job/', createJobView, name='post_job'),
     path('search/', SearchResultsListView.as_view(), name='search_results'),
     path('apply/', applicantCreateView, name='apply_job'),
+    path('apply-done/', ApplicationDone.as_view(), name='application_done'),
     path('applicant-list/', ApplicantList.as_view(), name='applicant_list'),
     path('only-redirect/', onlyRedirect, name='onlyRedirect')
     

@@ -55,6 +55,8 @@ class ApplicationModel(models.Model):
         get_user_model(),
         on_delete=models.CASCADE
     )
+    first_name = models.CharField(max_length=150, null=True)
+    last_name = models.CharField(max_length=150, null=True)
     
     def __str__(self):
         return self.Job_title

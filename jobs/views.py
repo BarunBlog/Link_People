@@ -2,7 +2,7 @@ import uuid
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
 from .models import PostJobModel, ApplicationModel
 from users.models import CustomUser
@@ -112,17 +112,23 @@ def applicantCreateView(request):
     Job_title = PostJobModel.objects.filter(Job_id=Job_id)[0].Job_title
     Applicant_id = request.user.id
 
-    p = ApplicationModel.objects.create(Job_id=Job_id, Job_title=Job_title, 
-            Applicant_id=Applicant_id)
-            
-    p.save()
+    a = ApplicationModel.objects.filter(Applicant_id=request.user.id, Job_id=Job_id)
 
-    message = 'You have successfully applied'
-      
-           
-    #return HttpResponseRedirect(reverse('jobs_details', args={Job_id}), {'message':message})
+    if a.exists():
+        return render(request, 'jobs/already_applied.html', {'message': 'You have already applied to this post.'})
 
-    return render(request, 'jobs/application_done.html', {'message':message})
+    else:
+        p = ApplicationModel.objects.create(Job_id=Job_id, Job_title=Job_title, 
+            Applicant_id=Applicant_id, first_name=request.user.first_name, last_name=request.user.last_name)
+
+        p.save()
+
+        return redirect('application_done')
+
+
+
+class ApplicationDone(TemplateView):
+    template_name = 'jobs/application_done.html'
 
 
 
@@ -135,7 +141,8 @@ class ApplicantList(LoginRequiredMixin, ListView):
     
         context = super().get_context_data(**kwargs)
 
-        context['applicant_list'] = ApplicationModel.objects.select_related('Applicant')
+
+        context['applicant_list'] = ApplicationModel.objects.filter(Job__Job_author_id=self.request.user.id)
 
                 
         return context

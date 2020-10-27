@@ -44,7 +44,7 @@
     
     <div class="job_list_outer">
         {% for job in job_list %}
-            <div class="job-list" id="{{ job.u_id }}">
+            <div class="job-list">
                 <div class="shadow p-3 mb-5 bg-white rounded">
                     <h4><a href="{{ job.get_absolute_url }}">{{ job.Job_title }}</a></h4>
                     <p style="color: rgb(92, 92, 92);font-size: 16px;">{{ job.Company }}</p>

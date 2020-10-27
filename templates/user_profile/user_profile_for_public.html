@@ -24,7 +24,7 @@
                     
                 
             </div>
-            <p style="font-size: 16px;">{{ join_result.Summary }}</p>
+            <p style="font-size: 16px;">{{ join_result.Summary|linebreaks }}</p>
         </div>
 
         <div class="shadow-lg p-3 mb-5 bg-white rounded">
@@ -55,7 +55,7 @@
         <div class="shadow-lg p-3 mb-5 bg-white rounded">
             <div class="profile-skills">
                 <h3>Skills & Endorsements</h3>
-                <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Skill }}</p>
+                <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Skill|linebreaks }}</p>
                 
             </div>
 

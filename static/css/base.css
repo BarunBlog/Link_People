@@ -9,6 +9,7 @@ body{
     height: auto;
     min-height: 700px;
     border: 0px solid blue;
+    overflow: auto;
 }
 
 h1 {
@@ -237,22 +238,35 @@ h1 {
 
 .job_list_outer{
     position: relative;
-    margin: 0 auto;
+
     width: 100%;
     height: auto;
     border: 0px solid black;
+    overflow: auto;
 }
 
 
 .job-list {
     position: relative;
-    margin: 0 auto;
+
     width: 48%;
     height: auto;
     margin-bottom: 20px;
     margin-top: 2px;
     margin-left: 2px;
     margin-right: 2px;
-    float: left;
     border: 0px solid black;
+    float: left;
+
+}
+
+@media (max-width:1000px) {
+    .job-list{
+        width: 99%;
+        float: none;
+    }
+    .about_bottom{
+        margin-top: 190px;
+    }
+
 }

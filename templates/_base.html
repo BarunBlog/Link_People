@@ -74,8 +74,8 @@
                     <div class="col-md-6 mt-md-0 mt-3">
             
                         <!-- Content -->
-                        <h5 class="text-uppercase">Footer Content</h5>
-                        <p>Here you can use rows and columns to organize your footer content.</p>
+                        <h5 class="text-uppercase">Link People</h5>
+                        <p>Connect the world’s professionals to make them more productive and successful.</p>
             
                     </div>
                     <!-- Grid column -->
@@ -86,20 +86,26 @@
                     <div class="col-md-3 mb-md-0 mb-3">
             
                         <!-- Links -->
-                        <h5 class="text-uppercase">Links</h5>
+                        <h5 class="text-uppercase">General</h5>
                 
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Link 1</a>
+                                <a href="{% url 'home' %}">Home</a>
+                            </li>
+                            {% if not user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'account_signup' %}">Sign up</a>
                             </li>
                             <li>
-                                <a href="#!">Link 2</a>
+                                <a href="{% url 'account_login' %}">Log in</a>
                             </li>
+                            {% else %}
                             <li>
-                                <a href="#!">Link 3</a>
+                                <a href="{% url 'account_login' %}">Log out</a>
                             </li>
+                            {% endif %}
                             <li>
-                                <a href="#!">Link 4</a>
+                                <a href="{% url 'about' %}">About</a>
                             </li>
                         </ul>
             
@@ -110,20 +116,17 @@
                     <div class="col-md-3 mb-md-0 mb-3">
             
                         <!-- Links -->
-                        <h5 class="text-uppercase">Links</h5>
+                        <h5 class="text-uppercase">Browse LinkPeople</h5>
                 
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Link 1</a>
+                                <a href="{% url 'job_list' %}">Jobs</a>
                             </li>
                             <li>
-                                <a href="#!">Link 2</a>
+                                <a href="{% url 'post_job' %}">Post a job</a>
                             </li>
                             <li>
-                                <a href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 4</a>
+                                <a href="{% url 'blog_list' %}">Get premium</a>
                             </li>
                         </ul>
             
@@ -138,7 +141,7 @@
         
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+                <a href="{% url 'home' %}"> LinkPeople.com</a>
             </div>
             <!-- Copyright -->
         
