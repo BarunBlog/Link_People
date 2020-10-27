@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
+    'debug_toolbar',
 
     # Local
     'pages.apps.PagesConfig',
@@ -80,6 +81,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,6 +89,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Link_people.urls'
@@ -234,3 +238,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Stripe
 STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
 STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')
+
+
+# Django-debug-toolbar
+INTERNAL_IPS = ('127.0.0.1',)
+
+
+# set three additional fields to add per-site caching
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800 # number of seconds to cache a page. After the period is up, the cache expires and becomes empty.
+CACHE_MIDDLEWARE_KEY_PREFIX = ''

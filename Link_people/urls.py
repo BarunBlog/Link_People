@@ -37,3 +37,12 @@ urlpatterns = [
     path('purchase/', include('orders.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# We only want Debug Toolbar to appear if DEBUG is true so we’ll add logic to display it only in this case
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
