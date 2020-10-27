@@ -35,6 +35,8 @@ environ.Env.read_env(env_file)
 # False if not in os.environ
 DEBUG = env('DEBUG', default=False)
 
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
+
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ, So provided default value
 SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
@@ -43,10 +45,8 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -248,3 +248,17 @@ INTERNAL_IPS = ('127.0.0.1',)
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 604800 # number of seconds to cache a page. After the period is up, the cache expires and becomes empty.
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+
+
+# security settings
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True # To help guard against XSS attacks
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+
+    # web browsers should only interact via HTTPS
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True # otherwise your site may still be vulnerable via an insecure connection to a subdomain.
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
