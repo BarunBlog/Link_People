@@ -7,7 +7,8 @@ body{
     margin: 0 auto;
     width: 100%;
     height: auto;
-    border: 0px solid blue;
+    min-height: 700px;
+    border: 1px solid blue;
 }
 
 h1 {
@@ -170,6 +171,78 @@ h1 {
     float: left;
     border: 0px solid black;
 }
+
+
+.about_top{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border: 0px solid black;
+    margin-top: -700px;
+}
+
+.about_bottom{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border: 0px solid black;
+    margin-top: 690px;
+}
+
+
+@media (max-width:994px) {
+    .about_top{
+        margin-top: -550px;
+    }
+    .about_bottom{
+        margin-top: 550px;
+    }
+
+}
+
+@media (max-width:780px) {
+    .about_top{
+        margin-top: -400px;
+    }
+    .about_bottom{
+        margin-top: 480px;
+    }
+
+}
+
+@media (max-width:500px) {
+    .about_top{
+        margin-top: -290px;
+    }
+    .about_bottom{
+        margin-top: 290px;
+    }
+
+}
+
+@media (max-width:370px) {
+    .about_top{
+        margin-top: -190px;
+    }
+    .about_bottom{
+        margin-top: 190px;
+    }
+
+}
+
+
+.job_list_outer{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    border: 0px solid black;
+}
+
 
 .job-list {
     position: relative;

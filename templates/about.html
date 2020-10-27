@@ -1,9 +1,28 @@
 {% extends '_base.html' %}
+{% load static %}
+
 
 {% block title %}
-    About
+    About LinkPeople
 {% endblock %}
 
 {% block content %}
-    <h1>About Page</h1>
+    <img src="{% static 'images/about.jpg' %}" style="width: 100%; height: auto;" alt="">
+
+    <div class="about_top">
+        <h1>About LinkPeople</h1>
+
+    </div>
+    <div class="about_bottom">
+
+        <p style="color: rgb(92, 92, 92);font-size: 18px;">Welcome to LinkPeople, the countries largest professional network with thousands of users in more than 60 districts.</p>
+        <br><br><h2>Vision</h2>
+        <p style="color: rgb(92, 92, 92);font-size: 18px;">Create economic opportunity for every member of the global workforce.</p>
+        <br><br><h2>Mission</h2>
+        <p style="color: rgb(92, 92, 92);font-size: 18px;">The mission of LinkPeople is simple: connect the world’s professionals to make them more productive and successful.</p>
+        <br><br><h2>Who are we?</h2>
+        <p style="color: rgb(92, 92, 92);font-size: 18px;">LinkPeople began in co-founder Barun Bhattacharjee's living room in 2020 and was officially launched on Oct 27, 2020.
+
+            Today, LinkPeople leads a diversified business with revenues from membership subscriptions, advertising sales and recruitment solutions under the leadership of Barun Bhattacharjee.</p>
+    </div>
 {% endblock %}
