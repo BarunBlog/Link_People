@@ -6,37 +6,60 @@
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <h1>Hello</h1>
-    {% else %}
-        <h1>Find Your Jobs.</h1>
+    <h1>Find Your Jobs</h1>
 
-        <div class="content_search_jobs_home">
+    <div class="content_search_jobs_home">
 
-            <div class="search_jobs_home">
+        <div class="search_jobs_home">
 
-                <form action="{% url 'search_results' %}" method="get">
+            <form action="{% url 'search_results' %}" method="get">
 
-                    <div class="form-group">
-                        <label for="exampleInputSearchJobs">Search jobs</label>
-                        <input name="q1" type="text" class="form-control" id="exampleInputSearchJobs" placeholder="Search by title, skill or company"
-                        aria-label="Search">
-                    </div>
+                <div class="form-group">
+                    <label for="exampleInputSearchJobs">Search jobs</label>
+                    <input name="q1" type="text" class="form-control" id="exampleInputSearchJobs" placeholder="Search by title, skill or company"
+                    aria-label="Search">
+                </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputLocation">Location</label>
-                        <input name="q2" class="form-control" type="text" id="exampleInputLocation" placeholder="Search by location"
-                        aria-label="Search">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-
-            </div>
-    
-            <div class="search_jobs_img">
-                <img src="{% static 'images/search_job_img.jpg' %}" style="border-radius: 50%; width: 450px; height: auto;" alt="">
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputLocation">Location</label>
+                    <input name="q2" class="form-control" type="text" id="exampleInputLocation" placeholder="Search by location"
+                    aria-label="Search">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
 
         </div>
-    {% endif %}
+
+
+        <div class="search_jobs_img">
+            <img src="{% static 'images/search_job_img.jpg' %}" style="border-radius: 50%; width: 450px; height: auto;" alt="">
+        </div>
+
+    </div>
+
+    <h1>Learn a new skill</h1><br>
+
+    <div class="content_search_jobs_home">
+        <div class="search_jobs_home">
+
+            <form action="{% url 'blog_search_results' %}" method="get">
+                
+                <div class="form-group">
+                    <label for="exampleInputSearchJobs">Search blogs</label>
+                    <input name="q1" type="text" id="exampleInputSearchJobs" class="form-control" placeholder="Search by blog title here">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>   
+        
+        </div>
+
+
+        <div class="search_jobs_img">
+            <img src="{% static 'images/Skill.jpg' %}" style="border-radius: 50%; width: 450px; height: auto;" alt="">
+        </div>
+    </div>
+
+    
+
 {% endblock %}
