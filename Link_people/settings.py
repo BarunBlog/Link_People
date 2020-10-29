@@ -31,7 +31,7 @@ env = environ.Env(
 ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 
 
-if ENVIRONMENT = 'production':
+if ENVIRONMENT == 'production':
     env_file = os.path.join(BASE_DIR, ".env")
 
     # reading .env file
