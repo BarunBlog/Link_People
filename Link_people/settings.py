@@ -15,6 +15,7 @@ from pathlib import Path
 
 import environ
 
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,7 +47,7 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['linkpeople.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -83,6 +85,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -265,3 +268,8 @@ if ENVIRONMENT == 'production':
 
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+
+    # dj-database-url
+    db_from_env = dj_database_url.config(conn_max_age=500) # Returns configured DATABASE dictionary from DATABASE_URL
+    DATABASES['default'].update(db_from_env)
