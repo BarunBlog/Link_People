@@ -28,15 +28,19 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-env_file = os.path.join(BASE_DIR, ".env")
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 
-# reading .env file
-environ.Env.read_env(env_file)
+
+if ENVIRONMENT = 'production':
+    env_file = os.path.join(BASE_DIR, ".env")
+
+    # reading .env file
+    environ.Env.read_env(env_file)
 
 # False if not in os.environ
 DEBUG = env('DEBUG', default=False)
 
-ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
+
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ, So provided default value
 SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
