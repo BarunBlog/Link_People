@@ -17,6 +17,8 @@ import environ
 
 import dj_database_url
 
+import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -277,3 +279,7 @@ if ENVIRONMENT == 'production':
     # dj-database-url
     db_from_env = dj_database_url.config(conn_max_age=500) # Returns configured DATABASE dictionary from DATABASE_URL
     DATABASES['default'].update(db_from_env)
+
+
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
