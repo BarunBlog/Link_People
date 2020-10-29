@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %} Link People {% endblock %}</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,17 +13,10 @@
 
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        
-        
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         
         <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
         
-        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        
     </head>
 
     <body>
@@ -41,7 +34,14 @@
                     <a class="p-2 text-dark" href="{% url 'job_list' %}">Jobs</a>
                     {% if user.is_authenticated %}
                         
-                        <a class="p-2 text-dark" href="{% url 'get_user_model_id' %}">Profile</a>
+                        {% if user.image_thumbnail %}
+                            <a class="p-2 text-dark" href="{% url 'get_user_model_id' %}">
+                                <img style="border-radius: 50%; width: 30px; height: auto;" class="logo" src="{{ user.image_thumbnail.url }} " alt="">Me
+                            </a>
+                        {% else %}
+                            <a class="p-2 text-dark" href="{% url 'get_user_model_id' %}">Profile</a>
+                        {% endif %}
+
                         <a class="p-2 text-dark" href="{% url 'blog_list' %}">Get Premium</a>
                         <a class="p-2 text-dark" href="{% url 'account_logout' %}">Log Out</a>
                     {% else %}

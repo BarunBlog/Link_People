@@ -27,7 +27,7 @@ h1 {
     width: 100%;
     height: auto;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     border: 0px solid red;
     overflow: auto;
 }
@@ -54,6 +54,43 @@ h1 {
 }
 
 
+.home_img1{
+    border-radius: 50%; 
+    width: 450px; 
+    height: auto;
+}
+
+.home_img2{
+    border-radius: 50%; 
+    width: 450px; 
+    height: auto;
+}
+
+
+
+@media (max-width:700px) {
+    .home_img1, .home_img2{
+        width: 350px;
+    }
+}
+@media (max-width:470px) {
+    .home_img1, .home_img2{
+        width: 300px;
+    }
+}
+@media (max-width:355px) {
+    .home_img1, .home_img2{
+        width: 250px;
+    }
+}
+@media (max-width:300px) {
+    .home_img1, .home_img2{
+        width: 200px;
+    }
+}
+
+
+
 @media (max-width:1200px) {
     .search_jobs_img{
         width: 55%;
@@ -68,6 +105,66 @@ h1 {
         width: 100%;
     }
 }
+
+.post_your_job_home{
+    position: relative;
+    background-color: rgb(236, 235, 230);
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    border: 0px solid red;
+    overflow: auto;
+}
+
+.post_your_job_home_h1{
+    position: relative;
+    margin: 0 auto;
+    padding: 45px 5px;
+    min-height: 200px;
+    float: left;
+    width: 57%;
+    margin-right: 10px;
+    border: 0px solid black;
+
+}
+
+
+.post_your_job_home_button{
+    position: relative;
+    margin: 0 auto;
+    padding: 45px 0;
+    height: auto;
+    float: left;
+    text-align: center;
+    width: 42%;
+    border: 0px solid black;
+}
+
+
+@media (max-width:1300px) {
+    .post_your_job_home_h1{
+        width: 45%;
+    }
+    .post_your_job_home_button{
+        width: 35%;
+    }
+}
+
+@media (max-width:994px) {
+    .post_your_job_home_h1{
+        width: 100%;
+        float: none;
+    }
+    .post_your_job_home_button{
+        width: 100%;
+        float: none;
+    }
+}
+
+
+
 
 .profile-detail {
     position: relative;

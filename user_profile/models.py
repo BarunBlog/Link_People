@@ -86,7 +86,7 @@ class UserProfileInfo(models.Model):
 
             if width > 300 and height > 300:
                 img.thumbnail((300, 300))
-
+            
             img.save(self.User_image.path)
 
 

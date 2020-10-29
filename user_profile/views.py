@@ -61,6 +61,12 @@ def detailUserProfileInfo(request, pk):
                 End_year=End_year, Skill=Skill, id_id=id_id)
             
             p.save()
+
+            if User_image:
+
+                user_thumbnail = CustomUser.objects.get(id=request.user.id)
+                user_thumbnail.image_thumbnail = User_image
+                user_thumbnail.save()
             
             
            
@@ -123,6 +129,12 @@ def detailUserProfileInfo(request, pk):
                 user_profile.Skill = Skill
 
                 user_profile.save()
+
+                if User_image:
+
+                    user_thumbnail = CustomUser.objects.get(id=request.user.id)
+                    user_thumbnail.image_thumbnail = User_image
+                    user_thumbnail.save()
 
 
                 
