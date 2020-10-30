@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 import uuid
 from PIL import Image
+from django.core.files.storage import default_storage as storage
 
 
 class CustomUser(AbstractUser):
@@ -20,12 +21,12 @@ class CustomUser(AbstractUser):
         super(CustomUser, self).save()
 
         if self.image_thumbnail:
-            img = Image.open(self.image_thumbnail.name)
+            img = Image.open(self.image_thumbnail)
             width, height = img.size  # Get dimensions
 
             if width > 100 and height > 100:
                 # keep ratio but shrink down
-                img.thumbnail((width, height))
+                img.thumbnail((width, height), Image.ANTIALIAS)
 
             # check which one is smaller
             if height < width:
@@ -45,7 +46,10 @@ class CustomUser(AbstractUser):
                 img = img.crop((left, top, right, bottom))
 
             if width > 100 and height > 100:
-                img.thumbnail((100, 100))
+                img.thumbnail((100, 100), Image.ANTIALIAS)
 
-            img.save(self.image_thumbnail.name)
+            fh = storage.open(self.image_thumbnail.name, "wb")
+            format = 'png'
+            img.save(fh, format)
+            fh.close()
 

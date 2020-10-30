@@ -6,6 +6,7 @@ from users.models import CustomUser
 from django.urls import reverse
 
 from PIL import Image
+from django.core.files.storage import default_storage as storage
 
 
 EmpType_choises = (
@@ -57,15 +58,15 @@ class UserProfileInfo(models.Model):
 
 
 
-    def save(self, *args, **kwargs):
-        super().save()
+    def save(self):
+        super(UserProfileInfo, self).save()
         if self.User_image:
-            img = Image.open(self.User_image.name)
+            img = Image.open(self.User_image)
             width, height = img.size  # Get dimensions
 
             if width > 300 and height > 300:
                 # keep ratio but shrink down
-                img.thumbnail((width, height))
+                img.thumbnail((width, height), Image.ANTIALIAS)
 
             # check which one is smaller
             if height < width:
@@ -85,9 +86,12 @@ class UserProfileInfo(models.Model):
                 img = img.crop((left, top, right, bottom))
 
             if width > 300 and height > 300:
-                img.thumbnail((300, 300))
-            
-            img.save(self.User_image.name)
+                img.thumbnail((300, 300), Image.ANTIALIAS)
+
+            fh = storage.open(self.User_image.name, "wb")
+            format = 'png'
+            img.save(fh, format)
+            fh.close()
 
 
 
