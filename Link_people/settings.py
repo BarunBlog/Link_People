@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'debug_toolbar',
+    'cloudinary_storage',
+    'cloudinary',
 
     # Local
     'pages.apps.PagesConfig',
@@ -283,3 +285,9 @@ if ENVIRONMENT == 'production':
 
     # Activate Django-Heroku.
     django_heroku.settings(locals())
+
+
+    # For handling media files
+    CLOUDINARY_URL = env('CLOUDINARY_URL')
+
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
