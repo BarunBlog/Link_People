@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %} Link People {% endblock %}</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,20 +11,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
 
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        
-        
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-        
-        <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
-        
-        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
         
         
     </head>
@@ -71,101 +60,87 @@
         </div>
 
 
-        <!-- Footer -->
-        <footer class="page-footer font-small blue pt-4">
-
-            <!-- Footer Links -->
-            <div class="container-fluid text-center text-md-left">
+        <!--Footer-->
+        <footer class="footer-distributed">
+ 
+            <div class="footer-left">
+     
+                <h3>Link<span>People</span></h3>
         
-                <!-- Grid row -->
-                <div class="row">
-            
-                    <!-- Grid column -->
-                    <div class="col-md-6 mt-md-0 mt-3">
-            
-                        <!-- Content -->
-                        <h5 class="text-uppercase">Link People</h5>
-                        <p>Connect the world’s professionals to make them more productive and successful.</p>
-            
-                    </div>
-                    <!-- Grid column -->
-            
-                    <hr class="clearfix w-100 d-md-none pb-3">
-            
-                    <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
-            
-                        <!-- Links -->
-                        <h5 class="text-uppercase">General</h5>
+                <p class="footer-links">
+                    <h5 style="color: white;">General</h5>
                 
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{% url 'home' %}">Home</a>
-                            </li>
-                            {% if not user.is_authenticated %}
-                            <li>
-                                <a href="{% url 'account_signup' %}">Sign up</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'account_login' %}">Log in</a>
-                            </li>
-                            {% else %}
-                            <li>
-                                <a href="{% url 'account_login' %}">Log out</a>
-                            </li>
-                            {% endif %}
-                            <li>
-                                <a href="{% url 'about' %}">About</a>
-                            </li>
-                        </ul>
-            
-                    </div>
-                    <!-- Grid column -->
-            
-                    <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
-            
-                        <!-- Links -->
-                        <h5 class="text-uppercase">Browse LinkPeople</h5>
+                    
+                    <a style="color: white; padding: 3px;" href="{% url 'home' %}">Home</a>
+                    
+                    {% if not user.is_authenticated %}
+                    
+                        <a style="color: white; padding: 3px;" href="{% url 'account_signup' %}">Sign up</a>
+                    
+                    
+                        <a style="color: white; padding: 3px;" href="{% url 'account_login' %}">Log in</a>
+                    
+                    {% else %}
+                    
+                        <a style="color: white; padding: 3px;" href="{% url 'account_login' %}">Log out</a>
+                    
+                    {% endif %}
+                    
+                    <a style="color: white; padding: 3px;" href="{% url 'about' %}">About</a>
+                </p><br>
+
+                <p class="footer-links">
+                    <h5 style="color: white;">Browse LinkPeople</h5>
                 
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{% url 'job_list' %}">Jobs</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'post_job' %}">Post a job</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog_list' %}">Get premium</a>
-                            </li>
-                        </ul>
-            
-                    </div>
-                    <!-- Grid column -->
-            
+                    
+                    <a style="color: white; padding: 5px;"  href="{% url 'job_list' %}">Jobs</a>
+                    
+                    
+                    <a style="color: white; padding: 5px;" href="{% url 'post_job' %}">Post a job</a>
+                
+                
+                    <a style="color: white; padding: 5px;" href="{% url 'blog_list' %}">Get Premium</a>
+                    
+                    
+                    
+                </p><br>
+        
+                
+            </div>
+     
+            <div class="footer-center">
+     
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>21 Pantapath Street</span>Dhaka, Bangladesh</p>
                 </div>
-
-            <!-- Grid row -->
-            </div>
-            <!-- Footer Links -->
         
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="{% url 'home' %}"> LinkPeople.com</a>
-            </div>
-            <!-- Copyright -->
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+01745673749</p>
+                </div>
         
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="">barunbhattacharjee036@gmail.com</a></p>
+                </div>
+     
+            </div>
+     
+            <div class="footer-right">
+        
+                <p class="footer-company-about">
+                <span>About LinkPeople</span>
+                    Connect the world’s professionals to make them more productive and successful.
+                </p><br><br><br>
+     
+                <p class="footer-company-name">linkpeople &copy; 2019</p>
+     
+            </div>
+     
         </footer>
-        <!-- Footer -->
 
-
-        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
+        
         
 
 
