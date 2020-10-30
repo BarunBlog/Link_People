@@ -60,7 +60,7 @@ class UserProfileInfo(models.Model):
     def save(self, *args, **kwargs):
         super().save()
         if self.User_image:
-            img = Image.open(self.User_image.path)
+            img = Image.open(self.User_image.name)
             width, height = img.size  # Get dimensions
 
             if width > 300 and height > 300:
@@ -87,7 +87,7 @@ class UserProfileInfo(models.Model):
             if width > 300 and height > 300:
                 img.thumbnail((300, 300))
             
-            img.save(self.User_image.path)
+            img.save(self.User_image.name)
 
 
 

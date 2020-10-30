@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
         super(CustomUser, self).save()
 
         if self.image_thumbnail:
-            img = Image.open(self.image_thumbnail.path)
+            img = Image.open(self.image_thumbnail.name)
             width, height = img.size  # Get dimensions
 
             if width > 100 and height > 100:
@@ -47,5 +47,5 @@ class CustomUser(AbstractUser):
             if width > 100 and height > 100:
                 img.thumbnail((100, 100))
 
-            img.save(self.image_thumbnail.path)
+            img.save(self.image_thumbnail.name)
 
