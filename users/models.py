@@ -4,6 +4,7 @@ from django.utils import timezone
 import uuid
 from PIL import Image
 from django.core.files.storage import default_storage as storage
+from django.db import DEFAULT_DB_ALIAS
 
 
 class CustomUser(AbstractUser):
@@ -14,11 +15,11 @@ class CustomUser(AbstractUser):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     image_thumbnail = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=DEFAULT_DB_ALIAS, update_fields=None):
         self.username = self.email
         self.last_login = timezone.now()
         
-        super(CustomUser, self).save(*args, **kwargs)
+        super(CustomUser, self).save()
 
         if self.image_thumbnail:
             img = Image.open(self.image_thumbnail)
