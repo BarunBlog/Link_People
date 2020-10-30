@@ -291,3 +291,6 @@ if ENVIRONMENT == 'production':
     CLOUDINARY_URL = env('CLOUDINARY_URL')
 
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+    #  for sending files to web clients
+    SENDFILE_BACKEND = 'sendfile.backends.simple'
