@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
         self.username = self.email
         self.last_login = timezone.now()
         
-        super(CustomUser, self).save()
+        super(CustomUser, self).save(*args, **kwargs)
 
         if self.image_thumbnail:
             img = Image.open(self.image_thumbnail)

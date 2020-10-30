@@ -58,7 +58,7 @@ class UserProfileInfo(models.Model):
 
 
 
-    def save(self):
+    def save(self,  force_insert=False, force_update=False, using=None):
         super(UserProfileInfo, self).save()
         if self.User_image:
             img = Image.open(self.User_image)
