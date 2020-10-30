@@ -8,6 +8,7 @@ from django.urls import reverse
 from PIL import Image
 from django.core.files.storage import default_storage as storage
 
+from django.db import DEFAULT_DB_ALIAS
 
 EmpType_choises = (
         ('full-time', 'Full-time'),
@@ -58,7 +59,7 @@ class UserProfileInfo(models.Model):
 
 
 
-    def save(self,  force_insert=False, force_update=False, using=None):
+    def save(self,  force_insert=False, force_update=False, using=DEFAULT_DB_ALIAS, update_fields=None):
         super(UserProfileInfo, self).save()
         if self.User_image:
             img = Image.open(self.User_image)
