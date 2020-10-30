@@ -89,7 +89,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 MIDDLEWARE = [
-    #'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,7 +99,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    #'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Link_people.urls'
@@ -254,9 +254,9 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 
 # set three additional fields to add per-site caching
-'''CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 604800 # number of seconds to cache a page. After the period is up, the cache expires and becomes empty.
-CACHE_MIDDLEWARE_KEY_PREFIX = '''''
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 
 
