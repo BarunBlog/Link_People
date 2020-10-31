@@ -5,7 +5,9 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 CustomUser = get_user_model()
 
+admin.site.site_header = 'LinkPeople Admin Panel'
 
+    
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
