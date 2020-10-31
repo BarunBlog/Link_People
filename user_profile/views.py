@@ -62,11 +62,11 @@ def detailUserProfileInfo(request, pk):
             
             p.save()
 
-            if User_image:
+            '''if User_image:
 
                 user_thumbnail = CustomUser.objects.get(id=request.user.id)
                 user_thumbnail.image_thumbnail = User_image
-                user_thumbnail.save()
+                user_thumbnail.save()'''
             
             
            
@@ -130,11 +130,11 @@ def detailUserProfileInfo(request, pk):
 
                 user_profile.save()
 
-                if User_image:
+                '''if User_image:
 
                     user_thumbnail = CustomUser.objects.get(id=request.user.id)
                     user_thumbnail.image_thumbnail = User_image
-                    user_thumbnail.save()
+                    user_thumbnail.save()'''
 
 
                 

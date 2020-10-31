@@ -15,13 +15,13 @@ class CustomUser(AbstractUser):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     image_thumbnail = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
 
-    def save(self, force_insert=False, force_update=False, using=DEFAULT_DB_ALIAS, update_fields=None):
+    def save(self, *args, **kwargs):
         self.username = self.email
         self.last_login = timezone.now()
         
-        super(CustomUser, self).save()
+        super(CustomUser, self).save(*args, **kwargs)
 
-        if self.image_thumbnail:
+        '''if self.image_thumbnail:
             img = Image.open(self.image_thumbnail)
             width, height = img.size  # Get dimensions
 
@@ -52,5 +52,5 @@ class CustomUser(AbstractUser):
             fh = storage.open(self.image_thumbnail.name, "wb")
             format = 'png'
             img.save(fh, format)
-            fh.close()
+            fh.close()'''
 
