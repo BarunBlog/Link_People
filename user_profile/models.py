@@ -6,6 +6,11 @@ from users.models import CustomUser
 from django.urls import reverse
 
 from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+    
+
 from django.core.files.storage import default_storage as storage
 
 from django.db import DEFAULT_DB_ALIAS
@@ -60,11 +65,18 @@ class UserProfileInfo(models.Model):
 
 
     def save(self, *args, **kwargs):
-        super(UserProfileInfo, self).save(*args, **kwargs)
         if self.User_image:
-            filename = str(self.User_image.path)
-            img = Image.open(filename)
-            width, height = img.size  # Get dimensions
+
+            img = Image.open(self.User_image)
+            outputIoStream = BytesIO()
+
+            imageTemporaryResized = img.resize( (300,300) )
+            imageTemporaryResized.save(outputIoStream, format='png', quality=150)
+            outputIoStream.seek(0)
+            self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.User_image.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+            super(UserProfileInfo, self).save(*args, **kwargs)
+
+            '''width, height = img.size  # Get dimensions
 
             if width > 300 and height > 300:
                 # keep ratio but shrink down
@@ -89,11 +101,12 @@ class UserProfileInfo(models.Model):
 
             if width > 300 and height > 300:
                 img.thumbnail((300, 300), Image.ANTIALIAS)
-            img.save(filename)
-            '''fh = storage.open(self.User_image.name, "wb")
-            format = 'png'
-            img.save(fh, format)
-            fh.close()'''
+
+            image_file = StringIO.StringIO()
+            img.save(image_file, 'JPEG', quality=90)
+
+            User_image.file = image_file'''
+
 
 
 

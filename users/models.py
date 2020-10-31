@@ -6,6 +6,10 @@ from PIL import Image
 from django.core.files.storage import default_storage as storage
 from django.db import DEFAULT_DB_ALIAS
 
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
@@ -18,6 +22,17 @@ class CustomUser(AbstractUser):
     def save(self, *args, **kwargs):
         self.username = self.email
         self.last_login = timezone.now()
+
+        if self.image_thumbnail:
+
+            img = Image.open(self.image_thumbnail)
+            outputIoStream = BytesIO()
+
+            imageTemporaryResized = img.resize( (100,100) )
+            imageTemporaryResized.save(outputIoStream, format='png', quality=90)
+            outputIoStream.seek(0)
+            self.image_thumbnail = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.image_thumbnail.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+            
         
         super(CustomUser, self).save(*args, **kwargs)
 
