@@ -70,15 +70,23 @@ class UserProfileInfo(models.Model):
     def save(self, *args, **kwargs):
         if self.User_image:
             img = Image.open(self.User_image)
-            file_type = self.User_image.file.content_type
+            #file_type = self.User_image.file.content_type
             format = img.format
-            
+
             outputIoStream = BytesIO()
 
-            imageTemporaryResized = img.resize( (300,300) )
-            imageTemporaryResized.save(outputIoStream, format=format, quality=150)
-            outputIoStream.seek(0)
-            self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.%s" %(self.User_image.name.split('.')[0], format), file_type, sys.getsizeof(outputIoStream), None)
+            if format=='PNG':
+                rgb_img = img.convert('RGB')
+                imageTemporaryResized = rgb_img.resize( (300,300) )
+                imageTemporaryResized.save(outputIoStream, format='JPEG', quality=150)
+                outputIoStream.seek(0)
+                self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.jpg" %self.User_image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+            else:
+                imageTemporaryResized = img.resize( (300,300) )
+                imageTemporaryResized.save(outputIoStream, format='PNG', quality=150)
+                outputIoStream.seek(0)
+                self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.User_image.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+
             super(UserProfileInfo, self).save(*args, **kwargs)
 
             '''width, height = img.size  # Get dimensions

@@ -26,13 +26,24 @@ class CustomUser(AbstractUser):
         if self.image_thumbnail:
 
             img = Image.open(self.image_thumbnail)
+   
+            #file_type = self.image_thumbnail.file.content_type
+            format = img.format
+
             outputIoStream = BytesIO()
 
-            imageTemporaryResized = img.resize( (100,100) )
-            imageTemporaryResized.save(outputIoStream, format='png', quality=90)
-            outputIoStream.seek(0)
-            self.image_thumbnail = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.image_thumbnail.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+            if format=='PNG':
+                rgb_img = img.convert('RGB')
+                imageTemporaryResized = rgb_img.resize( (100,100) )
+                imageTemporaryResized.save(outputIoStream, format='JPEG', quality=90)
+                outputIoStream.seek(0)
+                self.image_thumbnail = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.jpg" %self.image_thumbnail.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
             
+            else:
+                imageTemporaryResized = img.resize( (100,100) )
+                imageTemporaryResized.save(outputIoStream, format='PNG', quality=90)
+                outputIoStream.seek(0)
+                self.image_thumbnail = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.image_thumbnail.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)         
         
         super(CustomUser, self).save(*args, **kwargs)
 
