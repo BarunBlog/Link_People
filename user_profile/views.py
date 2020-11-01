@@ -58,7 +58,8 @@ def detailUserProfileInfo(request, pk):
                 School_or_College_or_University=School_or_College_or_University, Degree=Degree, Field_of_study=Field_of_study,
                 Education_Start_year=Education_Start_year, Education_End_year=Education_End_year,
                 Experience_Title=Experience_Title, Employee_type=Employee_type, Company=Company, Start_year=Start_year,
-                End_year=End_year, Skill=Skill, id_id=id_id)
+                End_year=End_year, Skill=Skill, first_name=request.user.first_name,
+                last_name=request.user.last_name, id_id=id_id)
             
             p.save()
 

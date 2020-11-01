@@ -62,6 +62,9 @@ class UserProfileInfo(models.Model):
     # Skill
     Skill = models.TextField(blank=True)
 
+    first_name = models.CharField(max_length=150, blank=True, null=True)
+    last_name = models.CharField(max_length=150, blank=True, null=True)
+
 
 
     def save(self, *args, **kwargs):
@@ -111,7 +114,7 @@ class UserProfileInfo(models.Model):
 
 
     def __str__(self):
-        return self.Headline
+        return '%s %s' % (self.first_name, self.last_name)
 
     def get_absolute_url(self):
         return reverse('user_profile_info', kwargs={'pk':str(self.pk)})

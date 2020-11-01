@@ -17,24 +17,24 @@
     
             {% for applicant in applicant_list %}
                 
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <!--<th scope="row">{{i}}</th>-->
-                                <td>{{ applicant.Job_title }}</td>
+                    
+                    <tbody>
+                        <tr>
+                            <!--<th scope="row">{{i}}</th>-->
+                            <td>{{ applicant.Job_title }}</td>
 
-                                <form id="myForm" action="{% url 'useridFromApplicantList' %}" method="POST">
-                                    {% csrf_token %}
-                                    
-                                    <td>
-                                        <button class="btn btn-light" name="id" value="{{ applicant.Applicant_id }}">
-                                        {{ applicant.first_name }} {{ applicant.last_name }}</button>
-                                    </td>
-                                </form>
+                            <form id="myForm" action="{% url 'useridFromApplicantList' %}" method="POST">
+                                {% csrf_token %}
+                                
+                                <td>
+                                    <button class="btn btn-light" name="id" value="{{ applicant.Applicant_id }}">
+                                    {{ applicant.first_name }} {{ applicant.last_name }}</button>
+                                </td>
+                            </form>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                        </tr>
+                    </tbody>
+                    
             
                 {% empty %}
                     <li>No one applied yet.</li>
