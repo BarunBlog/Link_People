@@ -74,9 +74,9 @@ class UserProfileInfo(models.Model):
             outputIoStream = BytesIO()
 
             imageTemporaryResized = img.resize( (300,300) )
-            imageTemporaryResized.save(outputIoStream, format='png', quality=150)
+            imageTemporaryResized.save(outputIoStream, format='PNG', quality=150)
             outputIoStream.seek(0)
-            self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.User_image.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+            self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.PNG" %self.User_image.name.split('.')[0], 'image/PNG', sys.getsizeof(outputIoStream), None)
             super(UserProfileInfo, self).save(*args, **kwargs)
 
             '''width, height = img.size  # Get dimensions
