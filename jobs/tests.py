@@ -66,7 +66,18 @@ class JobsTests(TestCase): # new
 
 
     def test_job_post(self):
+        User = get_user_model()
+        user = User.objects.create_user(
+            username='partho',
+            email='partho007@gmail.com',
+            password='testpass123',
+            first_name='Partho',
+            last_name='Bhattacharjee',
+            country='Bangladesh',
+            city_or_district='Sylhet'
+        )
         post = PostJobModel.objects.create(
+            Job_author_id=user.id,
             Job_title='Sales Executive',
             Company='Unique Trading Company',
             Job_location='Dhaka, Bangladesh',
