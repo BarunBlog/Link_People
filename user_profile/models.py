@@ -37,7 +37,7 @@ class UserProfileInfo(models.Model):
         on_delete=models.CASCADE
     )
     # Main Info
-    User_image = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
+    User_image = models.ImageField(upload_to='profile_pic/', default='profile_pic/default.jpg', null=True, blank=True)
     Headline = models.CharField(max_length=50, blank=False)
     Current_position = models.CharField(max_length=100, blank=True)
     Summary = models.TextField(blank=True)
@@ -78,9 +78,9 @@ class UserProfileInfo(models.Model):
             if format=='PNG':
                 rgb_img = img.convert('RGB')
                 imageTemporaryResized = rgb_img.resize( (300,300) )
-                imageTemporaryResized.save(outputIoStream, format='PNG', quality=150)
+                imageTemporaryResized.save(outputIoStream, format='JPEG', quality=150)
                 outputIoStream.seek(0)
-                self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.png" %self.User_image.name.split('.')[0], 'image/png', sys.getsizeof(outputIoStream), None)
+                self.User_image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.jpg" %self.User_image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
             else:
                 imageTemporaryResized = img.resize( (300,300) )
                 imageTemporaryResized.save(outputIoStream, format='PNG', quality=150)

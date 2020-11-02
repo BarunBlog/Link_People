@@ -43,9 +43,9 @@
                 <p style="margin-left: 20px; font-size: 20px;">{{ join_result.Experience_Title }}</p>
                 <p style="margin-left: 20px; font-size: 18px;">Works at - {{ join_result.Company }}</p>
                 <p style="margin-left: 20px; font-size: 18px;">Employee type - {{ join_result.Employee_type }}</p>
-                {% if user_profile_info.End_year %}
-                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ join_result.Start_year }} - {{ join_result.End_year }}</p>
-                {% elif not user_profile_info.Start_year %}
+                {% if user_profile_info.Start_year and not user_profile_info.End_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ join_result.Start_year }} - Working</p>
+                {% else %}
                     <p style="margin-left: 20px; font-size: 18px;">Duration {{ join_result.Start_year }} - {{ join_result.End_year }}</p>
                 {% endif %}
             </div>

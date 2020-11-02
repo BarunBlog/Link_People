@@ -21,6 +21,6 @@ class SaveProfileForm(forms.ModelForm):
 
         }
     
-    def __init__(self, *args, **kwargs):
+    '''def __init__(self, *args, **kwargs):
         super(SaveProfileForm, self).__init__(*args, **kwargs)
-        self.fields['User_image'].required = False
+        self.fields['User_image'].required = False'''

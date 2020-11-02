@@ -43,9 +43,10 @@
                 <p style="margin-left: 20px; font-size: 20px;">{{ user_profile_info.Experience_Title }}</p>
                 <p style="margin-left: 20px; font-size: 18px;">Works at - {{ user_profile_info.Company }}</p>
                 <p style="margin-left: 20px; font-size: 18px;">Employee type - {{ user_profile_info.Employee_type }}</p>
-                {% if user_profile_info.End_year %}
-                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ user_profile_info.Start_year }} - {{ user_profile_info.End_year }}</p>
-                {% elif not user_profile_info.Start_year %}
+                
+                {% if user_profile_info.Start_year and not user_profile_info.End_year %}
+                    <p style="margin-left: 20px; font-size: 18px;">Duration {{ user_profile_info.Start_year }} - Working</p>
+                {% else %}
                     <p style="margin-left: 20px; font-size: 18px;">Duration {{ user_profile_info.Start_year }} - {{ user_profile_info.End_year }}</p>
                 {% endif %}
             </div>
@@ -77,7 +78,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data" class="post-form">
+                    <form action="" method="POST"  enctype="multipart/form-data" class="post-form">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button type="submit" class="btn btn-primary">Save</button>
