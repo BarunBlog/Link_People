@@ -22,8 +22,11 @@
         <div class="job-detail-right">
             <br><br>
             
-            <button  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="margin-left: 5px;" type="submit">Apply</button>
-            
+            {% if is_user_profile_created %}
+                <button  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="margin-left: 5px;" type="submit">Apply</button>
+            {% else %}
+                <button  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal1" style="margin-left: 5px;" type="submit">Apply</button>
+            {% endif %}
 
             <br><br><br>
             <p style="color: rgb(92, 92, 92); font-size: 18px;">Job Details</p>
@@ -64,6 +67,30 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" name="id" value="{{ job_detail.Job_id }}" class="btn btn-primary">Apply</button>
                 </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Apply Job</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                As you didn't create your profile yet, you can't apply for this job.
+            </div>
+            <div class="modal-footer">
+                
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
             </div>
         </div>
         </div>

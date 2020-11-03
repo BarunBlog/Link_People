@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
 from .models import PostJobModel, ApplicationModel
+from user_profile.models import UserProfileInfo
 from users.models import CustomUser
 from .forms import PostJobForm
 
@@ -85,6 +86,21 @@ class JobsDetailView(LoginRequiredMixin, DetailView):
     model = PostJobModel
     context_object_name = 'job_detail'
     template_name = 'jobs/job_detail.html'
+
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+
+        b = UserProfileInfo.objects.filter(id_id=self.request.user.id)
+
+        if b:
+            context['is_user_profile_created'] = True
+        else:
+            context['is_user_profile_created'] = False
+
+    
+        return context
 
 
 
