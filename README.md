@@ -10,3 +10,5 @@ Command : pip install requirements.txt
 Configure a PostgreSQL database locally.
 
 And also don't forget to add .env file locally to configure environment variables
+
+Visit the website live on https://linkpeople.herokuapp.com/
